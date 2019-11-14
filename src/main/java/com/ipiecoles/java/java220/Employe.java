@@ -63,7 +63,7 @@ public abstract class Employe {
 	public abstract Double getPrimeAnnuelle();
 
 	public void augmenterSalaire(Double pourcentage) {
-		this.salaire += this.salaire*(pourcentage/100);
+		this.salaire += this.salaire*pourcentage;
 	}
 	
 	public String getNom() {
