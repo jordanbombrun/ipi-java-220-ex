@@ -38,6 +38,7 @@ public class Commercial extends Employe {
 
     public Note equivalenceNote() {
         switch (this.performance) {
+            case 0 :
             case 50 :
                 return Note.INSUFFISANT;
             case 100 :
@@ -82,8 +83,3 @@ public class Commercial extends Employe {
     }
 
 }
-
-/*
-une méthode performanceEgale prenant un Integer en paramètre qui renvoie true
-si la performance du commercial est égale à celle passée en paramètre, false sinon
- */

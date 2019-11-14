@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Created by pjvilloud on 21/09/17.
  */
-public class Employe {
+public abstract class Employe {
 	private String nom;
 	private String prenom;
 	private String matricule;
@@ -31,7 +31,7 @@ public class Employe {
 		return 0;
 	}
 	
-	public static Integer getNbConges() {
+	public Integer getNbConges() {
 		return Entreprise.NB_CONGES_BASE;
 	}
 	
@@ -59,14 +59,8 @@ public class Employe {
 		if (matricule != null ? !matricule.equals(employe.matricule) : employe.matricule != null) return false;
 		return dateEmbauche != null ? dateEmbauche.equals(employe.dateEmbauche) : employe.dateEmbauche == null;
 	}
-	
-	/*
-	 * Coder la méthode augmenterSalaire prenant en paramètre un pourcentage 
-	 * d'augmentation de type Double et augmentant l'attribut salaire du pourcentage 
-	 * passé en paramètre :
-		Ex : un salaire de 500.0, avec une augmentation de 0.50, 
-		cela donne un salaire de 750.0
-	 */
+
+	public abstract Double getPrimeAnnuelle();
 
 	public void augmenterSalaire(Double pourcentage) {
 		this.salaire += this.salaire*(pourcentage/100);
