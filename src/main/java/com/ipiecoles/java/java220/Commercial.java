@@ -1,18 +1,24 @@
 package com.ipiecoles.java.java220;
 
 import org.joda.time.LocalDate;
+import java.util.Objects;
 
 public class Commercial extends Employe {
 
-    public static final double PRIME_ANNUELLE_MINI = 500d;
+    private static final double PRIME_ANNUELLE_MINI = 500d;
     private Double caAnnuel;
+    private Integer performance;
+    private Note note;
 
-    public Commercial() {}
+    public Commercial() {
+        super();
+    }
 
-    public Commercial(String nom, String prenom, String matricule,
-                      LocalDate dateEmbauche, Double salaire, Double caAnnuel) {
+    public Commercial(String nom, String prenom, String matricule, LocalDate dateEmbauche,
+                      Double salaire, Double caAnnuel, Integer performance) {
         super(nom, prenom, matricule, dateEmbauche, salaire);
         this.caAnnuel = caAnnuel;
+        this.performance = performance;
     }
 
     public Double getPrimeAnnuelle() {
@@ -26,6 +32,39 @@ public class Commercial extends Employe {
         return primeAnnuelle;
     }
 
+    public Boolean performanceEgale(Integer perf) {
+        return Objects.equals(this.performance, perf);
+    }
+
+    public Note equivalenceNote() {
+        switch (this.performance) {
+            case 50 :
+                return Note.INSUFFISANT;
+            case 100 :
+                return Note.PASSABLE;
+            case 150 :
+                return Note.BIEN;
+            case 200 :
+                return Note.TRES_BIEN;
+            default :
+                return null;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Commercial that = (Commercial) o;
+        return (caAnnuel.equals(that.caAnnuel) && performance.equals(that.performance));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), caAnnuel, performance);
+    }
+
     public Double getCaAnnuel() {
         return caAnnuel;
     }
@@ -34,10 +73,17 @@ public class Commercial extends Employe {
         this.caAnnuel = caAnnuel;
     }
 
+    public Integer getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(Integer performance) {
+        this.performance = performance;
+    }
+
 }
 
 /*
-Modifier la méthode getPrimeAnnuelle précédemment générée par
-l'IDE pour que la prime soit égale à 5% du caAnnuel, avec un minimum
-de 500 € même en cas de chiffre d'affaire nul.
+une méthode performanceEgale prenant un Integer en paramètre qui renvoie true
+si la performance du commercial est égale à celle passée en paramètre, false sinon
  */

@@ -2,6 +2,8 @@ package com.ipiecoles.java.java220;
 
 import org.joda.time.LocalDate;
 
+import java.util.Objects;
+
 /**
  * Created by pjvilloud on 21/09/17.
  */
@@ -41,19 +43,21 @@ public class Employe {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((matricule == null) ? 0 : matricule.hashCode());
-		result = prime * result + ((dateEmbauche == null) ? 0 : dateEmbauche.hashCode());		
-		result = prime * result + ((salaire == null) ? 0 : salaire.hashCode());
-		return result;
+		return Objects.hash(nom, prenom, matricule, dateEmbauche, salaire);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		return hashCode() == obj.hashCode();
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Employe)) return false;
+
+		Employe employe = (Employe) o;
+
+		if (Double.compare(employe.salaire, salaire) != 0) return false;
+		if (nom != null ? !nom.equals(employe.nom) : employe.nom != null) return false;
+		if (prenom != null ? !prenom.equals(employe.prenom) : employe.prenom != null) return false;
+		if (matricule != null ? !matricule.equals(employe.matricule) : employe.matricule != null) return false;
+		return dateEmbauche != null ? dateEmbauche.equals(employe.dateEmbauche) : employe.dateEmbauche == null;
 	}
 	
 	/*
